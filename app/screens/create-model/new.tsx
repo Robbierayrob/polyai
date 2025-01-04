@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
-import { Camera } from 'expo-camera';
+import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 
 export default function NewModelScreen() {
   const [image, setImage] = useState<string | null>(null);
@@ -60,45 +59,82 @@ export default function NewModelScreen() {
       </Text>
 
       <View style={styles.imageContainer}>
-        <TouchableOpacity 
-          style={styles.imagePickerCard}
-          onPress={pickImage}
-        >
-          {image ? (
-            <Image 
-              source={{ uri: image }} 
-              style={styles.imagePreview}
-              resizeMode="cover"
-            />
-          ) : (
-            <View style={styles.placeholderContent}>
-              <Ionicons name="add" size={48} color="#666" />
-              <Text style={styles.imagePickerText}>Tap to add photo</Text>
-            </View>
-          )}
-        </TouchableOpacity>
-        
-        <TouchableOpacity 
-          style={styles.choosePhotoButton}
-          onPress={pickImage}
-        >
-          <Ionicons name="image" size={20} color="#fff" />
-          <Text style={styles.choosePhotoText}>Choose a Photo</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity 
-          style={styles.cameraButton}
-          onPress={takePhoto}
-        >
-          <Ionicons name="camera" size={20} color="#fff" />
-          <Text style={styles.cameraButtonText}>Take a Photo</Text>
-        </TouchableOpacity>
+        {isCameraActive ? (
+          <View style={styles.cameraContainer}>
+            <CameraView
+              style={styles.cameraPreview}
+              facing={CameraType.back}
+              ref={cameraRef}
+            >
+              <TouchableOpacity 
+                style={styles.captureButton}
+                onPress={handleCapture}
+              >
+                <Ionicons name="camera" size={32} color="#fff" />
+              </TouchableOpacity>
+            </CameraView>
+          </View>
+        ) : (
+          <>
+            <TouchableOpacity 
+              style={styles.imagePickerCard}
+              onPress={pickImage}
+            >
+              {image ? (
+                <Image 
+                  source={{ uri: image }} 
+                  style={styles.imagePreview}
+                  resizeMode="cover"
+                />
+              ) : (
+                <View style={styles.placeholderContent}>
+                  <Ionicons name="add" size={48} color="#666" />
+                  <Text style={styles.imagePickerText}>Tap to add photo</Text>
+                </View>
+              )}
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={styles.choosePhotoButton}
+              onPress={pickImage}
+            >
+              <Ionicons name="image" size={20} color="#fff" />
+              <Text style={styles.choosePhotoText}>Choose a Photo</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={styles.cameraButton}
+              onPress={takePhoto}
+            >
+              <Ionicons name="camera" size={20} color="#fff" />
+              <Text style={styles.cameraButtonText}>Take a Photo</Text>
+            </TouchableOpacity>
+          </>
+        )}
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  cameraContainer: {
+    width: '100%',
+    aspectRatio: 4/3,
+    borderRadius: 12,
+    overflow: 'hidden',
+    marginBottom: 16,
+  },
+  cameraPreview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  captureButton: {
+    backgroundColor: '#34C759',
+    padding: 16,
+    borderRadius: 50,
+    marginBottom: 20,
+  },
   container: {
     flex: 1,
     padding: 20,
