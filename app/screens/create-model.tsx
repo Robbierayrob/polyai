@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
-import { Link } from 'expo-router';
+import { Link, useNavigation } from 'expo-router';
 
 export default function CreateModelScreen() {
   const [modelName, setModelName] = useState("");
@@ -17,9 +17,6 @@ export default function CreateModelScreen() {
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>Create New 3D Model</Text>
-        <Link href="/(tabs)/home" style={styles.backLink}>
-          <Ionicons name="arrow-back" size={24} color="#6366f1" />
-        </Link>
       </View>
 
       {/* Form */}

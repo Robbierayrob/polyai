@@ -16,10 +16,9 @@ export default function RootLayout() {
         }}
       />
       <Stack.Screen
-        name="create-model"
+        name="screens"
         options={{
-          title: 'Create Model',
-          headerBackTitle: 'Home',
+          headerShown: false,
         }}
       />
     </Stack>
