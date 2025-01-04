@@ -18,7 +18,7 @@ export default function HomeScreen() {
       </View>
 
       {/* 3D Creation Card */}
-      <Link href="/create-model" asChild>
+      <Link href="/screens/create-model" asChild>
         <TouchableOpacity style={styles.creationCard}>
           <Ionicons name="cube" size={48} color="#6366f1" />
           <Text style={styles.creationText}>Create 3D Image Here</Text>
