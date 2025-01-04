@@ -88,22 +88,6 @@ export default function NewModelScreen() {
                     style={styles.imagePreview}
                     resizeMode="cover"
                   />
-                  <View style={styles.buttonRow}>
-                    <TouchableOpacity 
-                      style={styles.confirmButton}
-                      onPress={() => {
-                        // TODO: Add navigation/confirmation logic
-                      }}
-                    >
-                      <Text style={styles.buttonText}>Confirm</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                      style={styles.pickAnotherButton}
-                      onPress={() => setImage(null)}
-                    >
-                      <Text style={styles.buttonText}>Pick Another</Text>
-                    </TouchableOpacity>
-                  </View>
                 </>
               ) : (
                 <View style={styles.placeholderContent}>
@@ -113,7 +97,24 @@ export default function NewModelScreen() {
               )}
             </TouchableOpacity>
 
-            {!image && (
+            {image ? (
+              <View style={styles.buttonsContainer}>
+                <TouchableOpacity 
+                  style={styles.confirmButton}
+                  onPress={() => {
+                    // TODO: Add navigation/confirmation logic
+                  }}
+                >
+                  <Text style={styles.buttonText}>Confirm</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  style={styles.pickAnotherButton}
+                  onPress={() => setImage(null)}
+                >
+                  <Text style={styles.buttonText}>Pick Another</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
               <>
                 <TouchableOpacity 
                   style={styles.choosePhotoButton}
@@ -235,13 +236,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
-  buttonRow: {
-    position: 'absolute',
-    bottom: 16,
-    left: 16,
-    right: 16,
-    flexDirection: 'row',
+  buttonsContainer: {
+    width: '100%',
     gap: 8,
+    marginTop: 16,
   },
   confirmButton: {
     flex: 1,
