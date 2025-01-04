@@ -24,7 +24,7 @@ export default function TabsLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
+            <Ionicons name="home-outline" size={size} color={color} />
           ),
         }}
       />
@@ -33,7 +33,7 @@ export default function TabsLayout() {
         options={{
           title: 'Camera',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="camera" size={size} color={color} />
+            <Ionicons name="camera-outline" size={size} color={color} />
           ),
         }}
       />
