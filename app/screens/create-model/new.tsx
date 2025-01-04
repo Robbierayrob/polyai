@@ -5,28 +5,23 @@ import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 
 export default function NewModelScreen() {
   const [image, setImage] = useState<string | null>(null);
-  const [cameraPermission, setCameraPermission] = useState<boolean | null>(null);
+  const [isCameraActive, setIsCameraActive] = useState(false);
+  const [permission, requestPermission] = useCameraPermissions();
+  const cameraRef = useRef<CameraView>(null);
 
   const takePhoto = async () => {
-    // Request camera permissions
-    const { status } = await Camera.requestCameraPermissionsAsync();
-    setCameraPermission(status === 'granted');
-    
-    if (status !== 'granted') {
-      alert('Sorry, we need camera permissions to make this work!');
+    if (!permission?.granted) {
+      await requestPermission();
       return;
     }
+    setIsCameraActive(true);
+  };
 
-    // Launch camera
-    let result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaType.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.canceled && result.assets && result.assets.length > 0) {
-      setImage(result.assets[0].uri);
+  const handleCapture = async () => {
+    if (cameraRef.current) {
+      const photo = await cameraRef.current.takePictureAsync();
+      setImage(photo.uri);
+      setIsCameraActive(false);
     }
   };
 
