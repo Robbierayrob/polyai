@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-nati
 import { Link } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
-const user = "John"; // Replace with your actual user data
+const user = "Robert"; // Replace with your actual user data
 const recentModels = [
   { id: '1', name: 'Modern House', created: '2 hours ago' },
   { id: '2', name: 'Futuristic Car', created: '5 hours ago' },
