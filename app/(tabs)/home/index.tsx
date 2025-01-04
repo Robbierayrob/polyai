@@ -68,9 +68,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 6,
     elevation: 3,
-    aspectRatio: 1.5,
     width: '100%',
-    height: 200, // Fixed height for better consistency
+    height: 200,
+    marginHorizontal: 0, // Remove any horizontal margin
   },
   creationText: {
     fontSize: 18,
