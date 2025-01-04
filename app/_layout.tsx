@@ -28,6 +28,15 @@ export default function RootLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="create-model"
+        options={{
+          title: 'Create',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="add-circle" size={size} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
