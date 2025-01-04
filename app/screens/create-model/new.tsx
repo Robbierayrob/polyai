@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 
 export default function NewModelScreen() {
@@ -33,20 +34,33 @@ export default function NewModelScreen() {
         This is where you'll create a new 3D model from scratch.
       </Text>
 
-      <TouchableOpacity 
-        style={styles.imagePickerCard}
-        onPress={pickImage}
-      >
-        {image ? (
-          <Image 
-            source={{ uri: image }} 
-            style={styles.imagePreview}
-            resizeMode="cover"
-          />
-        ) : (
-          <Text style={styles.imagePickerText}>Please Add Photo</Text>
-        )}
-      </TouchableOpacity>
+      <View style={styles.imageContainer}>
+        <TouchableOpacity 
+          style={styles.imagePickerCard}
+          onPress={pickImage}
+        >
+          {image ? (
+            <Image 
+              source={{ uri: image }} 
+              style={styles.imagePreview}
+              resizeMode="cover"
+            />
+          ) : (
+            <View style={styles.placeholderContent}>
+              <Ionicons name="add" size={48} color="#666" />
+              <Text style={styles.imagePickerText}>Tap to add photo</Text>
+            </View>
+          )}
+        </TouchableOpacity>
+        
+        <TouchableOpacity 
+          style={styles.choosePhotoButton}
+          onPress={pickImage}
+        >
+          <Ionicons name="image" size={20} color="#fff" />
+          <Text style={styles.choosePhotoText}>Choose a Photo</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -69,6 +83,10 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginBottom: 20,
   },
+  imageContainer: {
+    width: '100%',
+    marginBottom: 20,
+  },
   imagePickerCard: {
     width: '100%',
     aspectRatio: 4/3,
@@ -80,14 +98,33 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
+    marginBottom: 16,
+  },
+  placeholderContent: {
+    alignItems: 'center',
+    gap: 8,
   },
   imagePickerText: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#666',
     fontWeight: '500',
   },
   imagePreview: {
     width: '100%',
     height: '100%',
+  },
+  choosePhotoButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    backgroundColor: '#007AFF',
+    paddingVertical: 12,
+    borderRadius: 8,
+  },
+  choosePhotoText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '500',
   },
 });
