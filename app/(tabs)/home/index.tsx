@@ -69,6 +69,8 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 3,
     aspectRatio: 1.5,
+    width: '100%',
+    height: 200, // Fixed height for better consistency
   },
   creationText: {
     fontSize: 18,
