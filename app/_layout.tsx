@@ -5,6 +5,12 @@ export default function RootLayout() {
   return (
     <Tabs>
       <Tabs.Screen
+        name="index"
+        options={{
+          href: null, // This hides the index screen from the tab bar
+        }}
+      />
+      <Tabs.Screen
         name="home"
         options={{
           title: 'Home',
