@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Link, useNavigation } from 'expo-router';
 
 export default function CreateModelScreen() {
+  const navigation = useNavigation();
   const [modelName, setModelName] = useState("");
 
   const handleCreateModel = () => {
@@ -16,6 +17,12 @@ export default function CreateModelScreen() {
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
+        <TouchableOpacity 
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="arrow-back" size={24} color="#6366f1" />
+        </TouchableOpacity>
         <Text style={styles.title}>Create New 3D Model</Text>
       </View>
 
@@ -60,8 +67,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#1a1a1a',
   },
-  backLink: {
+  backButton: {
     padding: 8,
+    marginRight: 10,
   },
   formContainer: {
     backgroundColor: '#fff',
