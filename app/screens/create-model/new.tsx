@@ -82,11 +82,29 @@ export default function NewModelScreen() {
               onPress={pickImage}
             >
               {image ? (
-                <Image 
-                  source={{ uri: image }} 
-                  style={styles.imagePreview}
-                  resizeMode="cover"
-                />
+                <>
+                  <Image 
+                    source={{ uri: image }} 
+                    style={styles.imagePreview}
+                    resizeMode="cover"
+                  />
+                  <View style={styles.buttonRow}>
+                    <TouchableOpacity 
+                      style={styles.confirmButton}
+                      onPress={() => {
+                        // TODO: Add navigation/confirmation logic
+                      }}
+                    >
+                      <Text style={styles.buttonText}>Confirm</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                      style={styles.pickAnotherButton}
+                      onPress={() => setImage(null)}
+                    >
+                      <Text style={styles.buttonText}>Pick Another</Text>
+                    </TouchableOpacity>
+                  </View>
+                </>
               ) : (
                 <View style={styles.placeholderContent}>
                   <Ionicons name="add" size={48} color="#666" />
@@ -94,22 +112,26 @@ export default function NewModelScreen() {
                 </View>
               )}
             </TouchableOpacity>
-            
-            <TouchableOpacity 
-              style={styles.choosePhotoButton}
-              onPress={pickImage}
-            >
-              <Ionicons name="image" size={20} color="#fff" />
-              <Text style={styles.choosePhotoText}>Choose a Photo</Text>
-            </TouchableOpacity>
-            
-            <TouchableOpacity 
-              style={styles.cameraButton}
-              onPress={takePhoto}
-            >
-              <Ionicons name="camera" size={20} color="#fff" />
-              <Text style={styles.cameraButtonText}>Take a Photo</Text>
-            </TouchableOpacity>
+
+            {!image && (
+              <>
+                <TouchableOpacity 
+                  style={styles.choosePhotoButton}
+                  onPress={pickImage}
+                >
+                  <Ionicons name="image" size={20} color="#fff" />
+                  <Text style={styles.choosePhotoText}>Choose a Photo</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity 
+                  style={styles.cameraButton}
+                  onPress={takePhoto}
+                >
+                  <Ionicons name="camera" size={20} color="#fff" />
+                  <Text style={styles.cameraButtonText}>Take a Photo</Text>
+                </TouchableOpacity>
+              </>
+            )}
           </>
         )}
       </View>
@@ -209,6 +231,35 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   cameraButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  buttonRow: {
+    position: 'absolute',
+    bottom: 16,
+    left: 16,
+    right: 16,
+    flexDirection: 'row',
+    gap: 8,
+  },
+  confirmButton: {
+    flex: 1,
+    backgroundColor: '#34C759',
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  pickAnotherButton: {
+    flex: 1,
+    backgroundColor: '#FF3B30',
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: '500',
