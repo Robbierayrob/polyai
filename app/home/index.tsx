@@ -1,10 +1,11 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
 
 const user = "John"; // Replace with your actual user data
-const recentItems = [
-  { id: '1', title: 'Project Alpha', description: 'Due in 3 days' },
-  { id: '2', title: 'Client Meeting', description: 'Scheduled for tomorrow' },
-  { id: '3', title: 'Design Review', description: 'Completed yesterday' },
+const recentModels = [
+  { id: '1', name: 'Modern House', created: '2 hours ago' },
+  { id: '2', name: 'Futuristic Car', created: '5 hours ago' },
+  { id: '3', name: 'Robot Design', created: '1 day ago' },
 ];
 
 export default function HomeScreen() {
@@ -15,29 +16,22 @@ export default function HomeScreen() {
         <Text style={styles.greeting}>Hello, {user}</Text>
       </View>
 
-      {/* Stats Card */}
-      <View style={styles.statsCard}>
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>12</Text>
-          <Text style={styles.statLabel}>Active Projects</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>3</Text>
-          <Text style={styles.statLabel}>Upcoming Deadlines</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>8</Text>
-          <Text style={styles.statLabel}>Completed Tasks</Text>
-        </View>
+      {/* 3D Creation Card */}
+      <View style={styles.creationCard}>
+        <Ionicons name="cube" size={48} color="#6366f1" />
+        <Text style={styles.creationText}>Create 3D Image Here</Text>
       </View>
 
-      {/* Recent Items List */}
+      {/* Recent Models List */}
       <View style={styles.recentContainer}>
-        <Text style={styles.sectionTitle}>Recent Activity</Text>
-        {recentItems.map((item) => (
-          <View key={item.id} style={styles.listItem}>
-            <Text style={styles.itemTitle}>{item.title}</Text>
-            <Text style={styles.itemDescription}>{item.description}</Text>
+        <Text style={styles.sectionTitle}>Recent 3D Models</Text>
+        {recentModels.map((model) => (
+          <View key={model.id} style={styles.listItem}>
+            <View style={styles.modelHeader}>
+              <Ionicons name="cube-outline" size={20} color="#6366f1" />
+              <Text style={styles.itemTitle}>{model.name}</Text>
+            </View>
+            <Text style={styles.itemDescription}>Created {model.created}</Text>
           </View>
         ))}
       </View>
@@ -59,31 +53,30 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#1a1a1a',
   },
-  statsCard: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  creationCard: {
     backgroundColor: '#fff',
     borderRadius: 12,
-    padding: 20,
+    padding: 30,
     marginBottom: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 6,
     elevation: 3,
+    aspectRatio: 1.5,
   },
-  statItem: {
+  creationText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#6366f1',
+    marginTop: 15,
+  },
+  modelHeader: {
+    flexDirection: 'row',
     alignItems: 'center',
-  },
-  statValue: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#1a1a1a',
-  },
-  statLabel: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 5,
+    gap: 8,
   },
   recentContainer: {
     marginBottom: 30,
