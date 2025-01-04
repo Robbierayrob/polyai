@@ -53,9 +53,9 @@ export default function NewModelScreen() {
         This is where you'll create a new 3D model from scratch.
       </Text>
 
-      <View style={styles.imageContainer}>
+      <View style={[styles.imageContainer, isCameraActive && {flex: 1}]}>
         {isCameraActive ? (
-          <View style={styles.cameraContainer}>
+          <View style={[styles.cameraContainer, {marginBottom: 0}]}>
             <CameraView
               style={styles.cameraPreview}
               facing="back"
@@ -113,10 +113,8 @@ export default function NewModelScreen() {
 
 const styles = StyleSheet.create({
   cameraContainer: {
+    flex: 1,
     width: '100%',
-    aspectRatio: 4/3,
-    borderRadius: 12,
-    overflow: 'hidden',
     marginBottom: 16,
   },
   cameraPreview: {
