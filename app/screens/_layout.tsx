@@ -10,9 +10,7 @@ export default function ScreensLayout() {
       <Stack.Screen
         name="create-model"
         options={{
-          title: 'Create Model',
-          headerShown: true,
-          headerBackTitle: 'Home',
+          headerShown: false,
         }}
       />
     </Stack>
