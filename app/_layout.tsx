@@ -15,6 +15,13 @@ export default function RootLayout() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="create-model"
+        options={{
+          title: 'Create Model',
+          headerBackTitle: 'Home',
+        }}
+      />
     </Stack>
   );
 }

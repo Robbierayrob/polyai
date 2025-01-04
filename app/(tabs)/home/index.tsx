@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { Link } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 const user = "John"; // Replace with your actual user data
@@ -17,10 +18,12 @@ export default function HomeScreen() {
       </View>
 
       {/* 3D Creation Card */}
-      <View style={styles.creationCard}>
-        <Ionicons name="cube" size={48} color="#6366f1" />
-        <Text style={styles.creationText}>Create 3D Image Here</Text>
-      </View>
+      <Link href="/create-model" asChild>
+        <TouchableOpacity style={styles.creationCard}>
+          <Ionicons name="cube" size={48} color="#6366f1" />
+          <Text style={styles.creationText}>Create 3D Image Here</Text>
+        </TouchableOpacity>
+      </Link>
 
       {/* Recent Models List */}
       <View style={styles.recentContainer}>
