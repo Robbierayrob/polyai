@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
-import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
+import { CameraView, useCameraPermissions } from 'expo-camera';
 
 export default function NewModelScreen() {
   const [image, setImage] = useState<string | null>(null);
@@ -58,7 +58,7 @@ export default function NewModelScreen() {
           <View style={styles.cameraContainer}>
             <CameraView
               style={styles.cameraPreview}
-              facing={CameraType.back}
+              facing="back"
               ref={cameraRef}
             >
               <TouchableOpacity 
