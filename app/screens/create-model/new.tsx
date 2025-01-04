@@ -2,9 +2,34 @@ import { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import { Camera } from 'expo-camera';
 
 export default function NewModelScreen() {
   const [image, setImage] = useState<string | null>(null);
+  const [cameraPermission, setCameraPermission] = useState<boolean | null>(null);
+
+  const takePhoto = async () => {
+    // Request camera permissions
+    const { status } = await Camera.requestCameraPermissionsAsync();
+    setCameraPermission(status === 'granted');
+    
+    if (status !== 'granted') {
+      alert('Sorry, we need camera permissions to make this work!');
+      return;
+    }
+
+    // Launch camera
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaType.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled && result.assets && result.assets.length > 0) {
+      setImage(result.assets[0].uri);
+    }
+  };
 
   const pickImage = async () => {
     // Request permissions
@@ -59,6 +84,14 @@ export default function NewModelScreen() {
         >
           <Ionicons name="image" size={20} color="#fff" />
           <Text style={styles.choosePhotoText}>Choose a Photo</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity 
+          style={styles.cameraButton}
+          onPress={takePhoto}
+        >
+          <Ionicons name="camera" size={20} color="#fff" />
+          <Text style={styles.cameraButtonText}>Take a Photo</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -123,6 +156,21 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   choosePhotoText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  cameraButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    backgroundColor: '#34C759',
+    paddingVertical: 12,
+    borderRadius: 8,
+    marginTop: 8,
+  },
+  cameraButtonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: '500',
